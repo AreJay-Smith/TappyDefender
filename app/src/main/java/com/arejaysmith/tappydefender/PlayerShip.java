@@ -3,6 +3,7 @@ package com.arejaysmith.tappydefender;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 
 /**
  * Created by Urge_Smith on 12/2/16.
@@ -22,6 +23,8 @@ public class PlayerShip {
     private final int MIN_SPEED = 1;
     private final int MAX_SPEED = 20;
 
+    private Rect hitBox;
+
     // Contstructor
     public PlayerShip(Context context, int screenX, int screenY) {
         x = 50;
@@ -31,6 +34,10 @@ public class PlayerShip {
         boosting = false;
         maxY = screenY - bitmap.getHeight();
         minY = 0;
+
+        // Initialize the hit box
+        hitBox = new Rect(x, y, bitmap.getWidth(),
+                bitmap.getHeight());
     }
 
     public void update() {
@@ -57,6 +64,11 @@ public class PlayerShip {
         if (y > maxY) {
             y = maxY;
         }
+
+        hitBox.left = x;
+        hitBox.top = y;
+        hitBox.right = x + bitmap.getWidth();
+        hitBox.bottom = y + bitmap.getHeight();
     }
 
     public Bitmap getBitmap() {
@@ -77,5 +89,9 @@ public class PlayerShip {
 
     public void setBoosting() { boosting = true; }
     public void stopBoosting() { boosting = false; }
+
+    public Rect getHitBox() {
+        return hitBox;
+    }
 
 }
