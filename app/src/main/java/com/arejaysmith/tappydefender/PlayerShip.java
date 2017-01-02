@@ -25,6 +25,8 @@ public class PlayerShip {
 
     private Rect hitBox;
 
+    private int shieldStrength;
+
     // Contstructor
     public PlayerShip(Context context, int screenX, int screenY) {
         x = 50;
@@ -34,6 +36,7 @@ public class PlayerShip {
         boosting = false;
         maxY = screenY - bitmap.getHeight();
         minY = 0;
+        shieldStrength = 2;
 
         // Initialize the hit box
         hitBox = new Rect(x, y, bitmap.getWidth(),
@@ -71,6 +74,10 @@ public class PlayerShip {
         hitBox.bottom = y + bitmap.getHeight();
     }
 
+    public void reduceShieldStrength() {
+        shieldStrength --;
+    }
+
     public Bitmap getBitmap() {
         return bitmap;
     }
@@ -92,6 +99,10 @@ public class PlayerShip {
 
     public Rect getHitBox() {
         return hitBox;
+    }
+
+    public int getShieldStrength() {
+        return shieldStrength;
     }
 
 }
